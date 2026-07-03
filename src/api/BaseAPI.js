@@ -14,7 +14,7 @@ export class BaseAPI {
     return await testStep(title, stepToRun);
   }
 
-  parseStatus(response) {
+  async parseStatus(response) {
     return response.status();
   }
 
@@ -30,12 +30,12 @@ export class BaseAPI {
 
   async assertSuccessResponseCode(response) {
     await this.step(`Assert the code ${SUCCESS_CODE} is returned`, async () => {
-      expect(this.parseStatus(response)).toEqual(SUCCESS_CODE);
+      expect(await this.parseStatus(response)).toEqual(SUCCESS_CODE);
     });
   }
   async assertCreatedResourceResponseCode(response) {
     await this.step(`Assert the code ${CREATED_RESOURCE_CODE} is returned`, async () => {
-      expect(this.parseStatus(response)).toEqual(CREATED_RESOURCE_CODE);
+      expect(await this.parseStatus(response)).toEqual(CREATED_RESOURCE_CODE);
     });
   }
 
